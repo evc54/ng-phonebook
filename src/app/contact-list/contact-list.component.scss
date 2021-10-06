@@ -1,0 +1,65 @@
+.contact-list {
+  position: relative;
+
+  &__header {
+    &__button {
+      margin-left: auto
+    }
+  }
+
+  &__list {
+    margin: 5rem 0 0 0;
+    padding: 0 0 5rem 0;
+    list-style: none;
+
+    > li {
+      display: block;
+
+      + li {
+        margin-top: 1.5rem;
+      }
+    }
+  }
+
+  &__card {
+    position: relative;
+    padding-right: 4rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    &__button {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      opacity: 0;
+      width: 3rem;
+      height: 3rem;
+
+      .mat-icon {
+        width: 2rem;
+        height: 2rem;
+        font-size: 2rem;
+        line-height: 2rem;
+        vertical-align: baseline;
+      }
+    }
+
+    &:hover &__button {
+      opacity: 1;
+    }
+
+    &__field {
+      margin-top: 0.8rem;
+
+      &_extra {
+        word-wrap: break-word;
+      }
+
+      &_oneliner {
+        white-space: nowrap;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

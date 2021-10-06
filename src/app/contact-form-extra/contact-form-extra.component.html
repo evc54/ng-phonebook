@@ -1,0 +1,87 @@
+<div class="form-extra">
+  <div class="form-extra__button">
+    <button
+      mat-icon-button
+      color="primary"
+      type="button"
+      (click)="onToggle()"
+    >
+      <mat-icon
+        *ngIf="!visible"
+        class="material-icons-outlined"
+      >
+        add_circle_outline
+      </mat-icon>
+
+      Add new field
+    </button>
+  </div>
+
+  <mat-card
+    *ngIf="visible"
+    class="form-extra__card mat-elevation-z0"
+  >
+    <mat-radio-group
+      [(ngModel)]="field.type"
+      #name="ngModel"
+      name="type"
+    >
+      <mat-radio-button 
+        *ngFor="let extraFieldType of extraFieldTypes"
+        [value]="extraFieldType.value"
+        class="form-extra__radio"
+      >
+        {{ extraFieldType.title }}
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field
+      *ngIf="!isLink"
+      class="form-extra__input"
+    >
+      <mat-label>Field Name</mat-label>
+
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="field.label"
+        name="label"
+        #name="ngModel"
+        maxlength="30"
+      >
+
+      <button
+        *ngIf="field.label"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="field.label = ''"
+      >
+        <mat-icon class="material-icons-outlined">close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div class="form-extra__buttons">
+      <button
+        mat-mini-fab
+        color="primary"
+        type="button"
+        [disabled]="!isValidated"
+        class="button mat-elevation-z0"
+        (click)="onSubmit()"
+      >
+        <mat-icon class="material-icons-outlined">task_alt</mat-icon>
+      </button>
+
+      <button
+        mat-mini-fab
+        color="white"
+        type="button"
+        class="button mat-elevation-z0"
+        (click)="onToggle()"
+      >
+        <mat-icon class="material-icons-outlined">highlight_off</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+</div>

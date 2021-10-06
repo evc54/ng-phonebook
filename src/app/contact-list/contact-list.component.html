@@ -1,0 +1,65 @@
+<header class="contact-list__header">
+  <h1>Contacts</h1>
+
+  <a
+    routerLink="/contact/new"
+    mat-raised-button
+    color="primary"
+    class="button contact-list__header__button mat-elevation-z0"
+  >
+    <mat-icon class="material-icons-outlined">add_circle_outline</mat-icon>
+
+    <span>Add</span>
+  </a>
+</header>
+
+<ul class="contact-list__list">
+  <li *ngFor="let contact of contacts">
+    <mat-card class="contact-list__card mat-elevation-z0">
+      <mat-card-title>{{ contact.name }} {{ contact.surname }}</mat-card-title>
+
+      <button
+        mat-icon-button
+        color="primary"
+        class="contact-list__card__button"
+        (click)="onUpdate(contact)"
+      >
+        <mat-icon class="material-icons-outlined">edit</mat-icon>
+      </button>
+
+      <mat-card-content>
+        <div class="contact-list__card__field">
+          <a [href]="'tel:' + contact.phone">
+            {{ contact.phone | extraFieldFormat }}
+          </a>
+        </div>
+
+        <div
+          *ngFor="let extra of contact.extra"
+          [ngClass]="{
+            'contact-list__card__field': true,
+            'contact-list__card__field_extra': true,
+            'contact-list__card__field_oneliner': extra.isLink || extra.isPhone
+          }"
+        >
+          <a
+            *ngIf="extra.isPhone || extra.isLink"
+            [href]="(extra.isPhone ? 'tel:' : '') + extra.value"
+            [title]="extra.label || 'Link'"
+            target="_blank"
+          >
+            {{ extra.value | extraFieldFormat: extra.type }}
+          </a>
+
+          <span
+            *ngIf="extra.isText"
+            [title]="extra.label"
+            [innerHTML]="extra.value | extraFieldFormat: extra.type"
+          ></span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </li>
+</ul>
+
+<app-contact-list-manage></app-contact-list-manage>

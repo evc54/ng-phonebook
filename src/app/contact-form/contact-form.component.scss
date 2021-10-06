@@ -1,0 +1,36 @@
+.form {
+  &__input {
+    width: 100%;
+    margin-top: 4rem;
+  }
+
+  &__extra {
+    display: flex;
+    align-items: center;
+    margin-top: 3rem;
+
+    &__input {
+      flex: 1 1 auto;
+
+      textarea {
+        resize: none;
+      }
+    }
+
+    &__button {
+      flex: 0 0 auto;
+      margin: 0 -1rem 0 1rem;
+      align-self: flex-end;
+    }
+  }
+
+  &__extra-form {
+    margin-top: 1rem;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6rem;
+  }
+}

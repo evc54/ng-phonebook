@@ -1,0 +1,23 @@
+$ng-color-primary: #5477e5;
+$ng-color-primary-active: #3a5ada;
+$ng-color-disabled: #fff;
+$ng-color-disabled-bg: #ccc;
+$ng-color-body-bg: #e5e5e5;
+$ng-color-text: #333;
+$ng-color-mute: rgba(51, 51, 51, 0.5);
+$ng-color-placeholder: rgba(51, 51, 51, 0.2);
+$ng-color-btn-bg-white: #f8f9fc;
+$ng-color-btn-bg-white-active: #ecedf0;
+$ng-button-icon-size: 1.7rem;
+
+$ng-phonebook-palette: (
+  main: $ng-color-primary,
+  lighter: $ng-color-primary-active,
+  darker: $ng-color-primary-active,
+  200: $ng-color-primary,
+  contrast : (
+    main: #fff,
+    lighter: #fff,
+    darker: #fff,
+  )
+);

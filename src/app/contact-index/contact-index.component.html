@@ -1,0 +1,27 @@
+<div class="index">
+  <div class="index__content">
+    <ng-template
+      [ngIf]="pending"
+      [ngIfElse]="initial"
+    >
+      <div>Please wait...</div>
+    </ng-template>
+
+    <ng-template #initial>
+      <div>Choose app mode:</div>
+      <a
+        href="#"
+        (click)="onChooseSource($event)"
+      >
+        start with defaults
+      </a>
+      or
+      <a
+        href="#"
+        (click)="onChooseSource($event, false)"
+      >
+        upload a JSON file
+     </a>.
+    </ng-template>
+  </div>
+</div>

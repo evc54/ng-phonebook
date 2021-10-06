@@ -19,7 +19,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@@models/*":["src/models/*"],
+      "@@services/*":["src/services/*"],
+      "@@pipes/*":["src/pipes/*"]
+    },
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -1,0 +1,252 @@
+@use '~@angular/material' as mat;
+@include mat.core();
+@import "./custom-theme.vars.scss";
+
+$ng-phonebook-typography: mat.define-typography-config(
+  $font-family: "'Open Sans', sans-serif",
+  $headline:      mat.define-typography-level(1.3rem, 1.2),
+  $title:         mat.define-typography-level(1.3rem, 1.2, 600),
+  $body-1:        mat.define-typography-level(1.3rem, 1.2, 400),
+  $body-2:        mat.define-typography-level(1.3rem, 1.2, 500),
+  $caption:       mat.define-typography-level(1.3rem, 1.2, 400),
+  $button:        mat.define-typography-level(1.3rem, 1.2, 600),
+  $input:         mat.define-typography-level(inherit, 1.2, 400)
+);
+$ng-phonebook-primary: mat.define-palette($ng-phonebook-palette, main, ligher, darker);
+$ng-phonebook-warn: mat.define-palette(mat.$red-palette);
+$ng-phonebook-theme: mat.define-light-theme((
+  color: (
+    primary: $ng-phonebook-primary,
+    accent: $ng-phonebook-primary,
+    warn: $ng-phonebook-warn,
+  ),
+  typography: $ng-phonebook-typography,
+));
+
+@include mat.all-component-themes($ng-phonebook-theme);
+
+// restyle material components
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 1.3rem;
+  line-height: 1.2;
+  color: $ng-color-text;
+  background-color: $ng-color-body-bg;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 400;
+  line-height: 1.2;
+  color: $ng-color-primary;
+}
+
+header {
+  display: flex;
+  align-items: center;
+
+  h1 {
+    color: $ng-color-primary;
+    font-size: 1.8rem;
+    line-height: 3.5rem;
+    margin: 0;
+  }
+}
+
+a {
+  color: $ng-color-primary;
+  text-decoration: none;
+
+  &:hover {
+    color: $ng-color-primary-active;
+  }
+}
+
+.ng-star-inserted {
+  .mat-form-field-required-marker {
+    display: none;
+  }
+}
+
+.mat-form-field-appearance-legacy {
+  mat-label {
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $ng-color-placeholder;
+  }
+}
+
+.mat-form-field-should-float {
+  mat-label {
+    color: $ng-color-mute;
+    font-size: 14.67px; // 14.67px * scale(0.75) = required 11px
+  }
+}
+
+.mat-focused {
+  mat-label {
+    color: $ng-color-primary;
+  }
+}
+
+.mat-form-field {
+  .mat-form-field-suffix {
+    button {
+      color: $ng-color-primary;
+      position: relative;
+      right: -0.5rem;
+      
+      .mat-icon {
+        width: $ng-button-icon-size;
+        height: $ng-button-icon-size;
+        line-height: $ng-button-icon-size;
+      }
+    }
+  }
+
+  &.mat-form-field-appearance-legacy {
+    .mat-form-field-underline {
+      height: 2px;
+      background-color: #A0A0A0;
+    }
+
+    .mat-form-field-suffix {
+      button {
+        .mat-icon {
+          font-size: $ng-button-icon-size;
+        }
+      }
+    }
+  }
+
+  &.mat-form-field-invalid:not(.mat-focused) {
+    .mat-form-field-underline {
+      background-color: transparent;
+
+      .mat-form-field-ripple {
+        height: 2px;
+      }
+    }
+  }
+}
+
+.mat-radio-button {
+  .mat-radio-inner-circle {
+    transform: scale(0.5);
+    opacity: 1;
+    border: 3px solid #aaa;
+  }
+  
+  &.mat-accent {
+    .mat-radio-inner-circle {
+      background-color: transparent;
+    }
+  }
+
+  &.mat-radio-checked {
+    .mat-radio-inner-circle {
+      border-color: $ng-color-primary;
+      background-color: $ng-color-primary;
+    }
+  }
+
+  .mat-ripple {
+    display: none;
+  }
+}
+
+a,
+button {
+  &.mat-raised-button {
+    padding: 0.6rem 1.6rem;
+    border: 2px solid transparent;
+    border-radius: 3rem;
+    font-size: 1.4rem;
+    line-height: $ng-button-icon-size;
+    font-weight: bold;
+    display: inline-flex;
+
+    .mat-button-wrapper {
+      display: inline-flex;
+      align-items: center;
+      line-height: $ng-button-icon-size;
+
+      .mat-icon {
+        width: $ng-button-icon-size;
+        height: $ng-button-icon-size;
+        font-size: $ng-button-icon-size;
+        line-height: $ng-button-icon-size;
+        margin-right: 0.9rem;
+      }
+    }
+  }
+
+  &.mat-mini-fab {
+    .mat-button-wrapper {
+      .mat-icon {
+        vertical-align: baseline;
+      }
+    }
+  }
+
+  &.mat-icon-button {
+    .mat-button-wrapper {
+      .mat-icon {
+        margin-right: 0.6rem;
+      }
+    }
+  }
+
+  &.mat-fab-button,
+  &.mat-mini-fab,
+  &.mat-raised-button {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+    &[color="primary"] {
+      &:hover {
+        background-color: $ng-color-primary-active;
+      }
+
+      &:active {
+        background-color: $ng-color-primary-active;
+      }
+    }
+
+    &[color="white"] {
+      color: $ng-color-primary;
+      background-color: $ng-color-btn-bg-white;
+
+      &:hover {
+        border-color: $ng-color-primary;
+      }
+
+      &:active {
+        background-color: $ng-color-btn-bg-white-active;
+      }
+    }
+
+    &[disabled],
+    &[disabled].mat-button-disabled {
+      color: $ng-color-disabled;
+      background-color: $ng-color-disabled-bg;
+      box-shadow: none;
+
+      &:hover {
+        background-color: $ng-color-disabled-bg;
+        box-shadow: none;
+      }
+    }
+  }
+}

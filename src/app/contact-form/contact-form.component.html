@@ -1,0 +1,190 @@
+<header>
+  <h1>{{ isNewContact ? 'Add contact' : 'Update contact' }}</h1>
+</header>
+
+<form
+  *ngIf="contact"
+  #form="ngForm"
+  class="form"
+  (ngSubmit)="onSubmit(form)"
+>
+  <mat-form-field class="form__input">
+    <mat-label>Name</mat-label>
+
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="contact.name"
+      name="name"
+      #name="ngModel"
+      maxlength="60"
+      required
+    >
+
+    <button
+      *ngIf="contact.name"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="contact.name = ''"
+    >
+      <mat-icon class="material-icons-outlined">close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field class="form__input">
+    <mat-label>Surname</mat-label>
+
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="contact.surname"
+      name="surname"
+      #name="ngModel"
+      maxlength="60"
+      required
+    >
+
+    <button
+      *ngIf="contact.surname"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="contact.surname = ''"
+    >
+      <mat-icon class="material-icons-outlined">close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field class="form__input">
+    <mat-label>Phone Number</mat-label>
+
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="contact.phone"
+      name="phone"
+      #name="ngModel"
+      mask="+0 000 000 00 00"
+      required
+    >
+
+    <button
+      *ngIf="contact.phone"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="contact.phone = ''"
+    >
+      <mat-icon class="material-icons-outlined">close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <div
+    *ngFor="let field of contact.extra; let i = index"
+    class="form__extra"
+  >
+    <mat-form-field class="form__extra__input">
+      <mat-label>{{ field.label || 'Link' }}</mat-label>
+
+      <!-- extra field type TEXT -->
+      <textarea
+        *ngIf="field.isText"
+        matInput
+        type="text"
+        [(ngModel)]="field.value"
+        [name]="'extra-field-' + i"
+        #name="ngModel"
+        [(ngModel)]="field.value"
+        rows="3"
+        required
+      ></textarea>
+
+      <!-- extra field type PHONE -->
+      <input
+        *ngIf="field.isPhone"
+        matInput
+        type="text"
+        [(ngModel)]="field.value"
+        [name]="'extra-field-' + i"
+        #name="ngModel"
+        [(ngModel)]="field.value"
+        mask="+0 000 000 00 00"
+        required
+      >
+
+      <!-- extra field type LINK -->
+      <input
+        *ngIf="field.isLink"
+        matInput
+        type="url"
+        [(ngModel)]="field.value"
+        [name]="'extra-field-' + i"
+        #name="ngModel"
+        [(ngModel)]="field.value"
+        pattern="https?://.*"
+        required
+      >
+
+      <button
+        *ngIf="field.value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        class="mat-elevation-z0"
+        (click)="field.value = ''"
+      >
+        <mat-icon class="material-icons-outlined">close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button
+      mat-icon-button
+      color="primary"
+      type="button"
+      class="form__extra__button mat-elevation-z0"
+      (click)="removeExtraField(i)"
+    >
+      <mat-icon class="material-icons-outlined">highlight_off</mat-icon>
+    </button>
+  </div>
+
+  <div class="form__extra-form">
+    <app-contact-form-extra (onCreate)="createExtraField($event)"></app-contact-form-extra>
+  </div>
+
+  <div class="form__actions">
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!form.form.valid"
+      class="button mat-elevation-z0"
+    >
+      <mat-icon
+        *ngIf="isNewContact"
+        class="material-icons-outlined"
+      >
+        add_circle_outline
+      </mat-icon>
+
+      <mat-icon
+        *ngIf="!isNewContact"
+        class="material-icons-outlined"
+      >
+        task_alt
+      </mat-icon>
+
+      <span>Save contact</span>
+    </button>
+
+    <a
+      routerLink="/contacts"
+      mat-raised-button
+      color="white"
+      class="button mat-elevation-z0"
+    >
+      Cancel
+    </a>
+  </div>
+</form>
